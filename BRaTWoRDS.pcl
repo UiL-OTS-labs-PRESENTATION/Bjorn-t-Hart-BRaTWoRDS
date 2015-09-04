@@ -1,0 +1,234 @@
+#--------- PCL ---------
+output_port port = output_port_manager.get_port( 1 );
+
+#################################################
+# Get and set values from parameters
+#################################################
+pause_text.set_caption(parameter_manager.get_string("Pause Text"));
+pause_text.redraw();
+
+instruction_text.set_caption(parameter_manager.get_string("Instruction Text"));
+instruction_text.redraw();
+
+int DURATION_OF_IMAGE =  parameter_manager.get_int("Duration Of Image",1000);
+int TRIAL_START_TRIGGER = parameter_manager.get_int("Start Marker",100);
+int TRIAL_STOP_TRIGGER = parameter_manager.get_int("Stop Marker",110);
+
+string INPUT_FILENAME = parameter_manager.get_string("Input File");
+string IN_LINE_DELIMITER = "\t"; # Putting in a tab does not work if done via parameters!
+
+int NUMBER_OF_TRIALS = parameter_manager.get_int("Number Of Trials", 64);
+int NUMBER_OF_SEGMENTS = parameter_manager.get_int("Number Of Segments", 8);
+int NUMBER_OF_COLUMNS = parameter_manager.get_int("Number Of Columns", 26);
+
+rgb_color INSTRUCTION_TEXT_COLOR = parameter_manager.get_color("Instruction Text Color");
+rgb_color BACKGROUND_COLOR = parameter_manager.get_color("Background Color");
+default.set_background_color(BACKGROUND_COLOR);
+rgb_color STIMULUS_TEXT_COLOR = parameter_manager.get_color("Stimulus Text Color");
+rgb_color STIMULUS_TEXT_BACKGROUND_COLOR = parameter_manager.get_color("Stimulus Text Background Color");
+
+
+double TEXT_AREA_WIDTH = double(parameter_manager.get_int("Text Area Width"))/100;
+double TEXT_AREA_HEIGHT = double(parameter_manager.get_int("Text Area Height"))/100;
+int TEXT_AREA_MARGIN = parameter_manager.get_int("Text Margin");
+int FONT_SIZE = parameter_manager.get_int("Font Size");
+
+#################################################
+array<trial> MAIN_PLAYLIST[NUMBER_OF_TRIALS];
+
+array<string> COLUMN_NAMES[0];
+array<int> INT_ID[NUMBER_OF_TRIALS];
+array<string> str_image[NUMBER_OF_TRIALS];
+array<string> str_segments[NUMBER_OF_TRIALS][NUMBER_OF_SEGMENTS];
+array<int> int_triggers[NUMBER_OF_TRIALS][NUMBER_OF_SEGMENTS];
+array<int> int_durations_ms[NUMBER_OF_TRIALS][NUMBER_OF_SEGMENTS];
+
+sub
+	parse_trial_line (string file_line, int index)
+begin
+	array<string> split_string[NUMBER_OF_COLUMNS];
+	file_line.split(IN_LINE_DELIMITER, split_string);
+	
+	if(split_string.count() != NUMBER_OF_COLUMNS) then
+		exit("Something went wrong parsing input on line " + string(index+1) + ". Parsed " + string(split_string.count()) + " fields! Instead of the expected " + string(NUMBER_OF_COLUMNS) + "!")
+	end;
+	
+	INT_ID[index] = int(split_string[1]);
+	
+	# Load image
+	str_image[index] = split_string[2];
+	
+	# Load segments
+	int segment_count = 1;
+	int line_index_offset = 3;
+	loop until
+		segment_count > NUMBER_OF_SEGMENTS
+	begin
+		str_segments[index][segment_count] = split_string[line_index_offset];
+		line_index_offset = line_index_offset + 1;
+		segment_count = segment_count + 1;
+	end;
+	
+	# Load Duration
+	segment_count = 1;
+	loop until
+		segment_count > NUMBER_OF_SEGMENTS
+	begin
+		int_durations_ms[index][segment_count] = int(split_string[line_index_offset]);
+		line_index_offset = line_index_offset + 1;
+		segment_count = segment_count + 1;
+	end;
+	
+	# Load Triggers
+	segment_count = 1;
+	loop until
+		segment_count > NUMBER_OF_SEGMENTS
+	begin
+		int_triggers[index][segment_count] = int(split_string[line_index_offset]);
+		line_index_offset = line_index_offset + 1;
+		segment_count = segment_count + 1;
+	end;
+end;
+
+sub
+	read_in_input_file (string filepath)
+begin
+	input_file in = new input_file;
+	if(!in.open( filepath, true)) then
+			exit("Could not open input file!");
+	end;
+	
+	string header_line = in.get_line();
+	header_line.split(IN_LINE_DELIMITER, COLUMN_NAMES);
+	
+	int count = 1;
+	loop until in.end_of_file() || count > NUMBER_OF_TRIALS*NUMBER_OF_COLUMNS || !in.last_succeeded() begin
+		parse_trial_line(in.get_line(), count);
+		count = count + 1;
+	end;
+	
+	if !in.last_succeeded() then
+		term.print( "Error while reading!\n" );
+	elseif !in.end_of_file() then
+		term.print( "Stopped before the end of the file was reached! Exceeded capacity?\n" )
+	end;  
+end;
+
+#################################################
+### GENERAL METHODS / SUBROUTINES
+#################################################
+
+sub
+   display( string message , int wait)
+begin
+   display_window.erase();
+   display_window.draw_text( message );
+	wait_interval(wait);
+end;
+
+sub
+	insert_image_picture(trial& item, int index)
+begin
+	picture image_picture = new picture();
+	image_picture.set_background_color(BACKGROUND_COLOR);
+	bitmap image = new bitmap(str_image[index]);
+	image.load();
+	image_picture.add_part(image, 0, 0);
+	stimulus_event event = item.add_stimulus_event(image_picture);
+	event.set_port_code(TRIAL_START_TRIGGER);
+	event.set_duration(DURATION_OF_IMAGE);
+	event.set_event_code("Image Shown");
+end;
+
+sub
+	align_text_to_top_left_box (picture& pic, box& background_box, text& segment)
+begin
+	double difference_x =  (-background_box.width_pix()/2) - ( -segment.width()/2 );
+	difference_x = difference_x + TEXT_AREA_MARGIN;
+	pic.set_part_x(3, difference_x); # Assumes that center_x is on 0.
+	
+	double difference_y =  (background_box.height_pix()/2) - ( segment.height()/2 );
+	difference_y = difference_y - TEXT_AREA_MARGIN;
+	pic.set_part_y(3, difference_y);# Assumes that center_y is on 0.
+end;
+
+sub
+	insert_segment_picture(trial& item, int index, int segment_number, int time)
+begin
+	picture segment_picture = new picture();
+	
+	int text_width = int(TEXT_AREA_WIDTH * display_device.width());
+	int text_height = int(TEXT_AREA_HEIGHT * display_device.height());
+	box background_box = new box(text_height, text_width, STIMULUS_TEXT_BACKGROUND_COLOR);
+	rgb_color shadow;
+	shadow.set(100,100,100);
+	box shadow_box = new box(text_height, text_width, shadow);
+	segment_picture.set_background_color(BACKGROUND_COLOR);
+	
+	text segment = new text();
+	segment.set_caption(str_segments[index][segment_number]);
+	segment.set_font_color(STIMULUS_TEXT_COLOR);
+	segment.set_background_color(STIMULUS_TEXT_BACKGROUND_COLOR);
+	segment.set_font_size(FONT_SIZE);
+	segment.set_align(segment.ALIGN_LEFT);
+	
+	segment.set_max_text_width(text_width - (2* TEXT_AREA_MARGIN));
+	segment.set_max_text_height(text_height - (2* TEXT_AREA_MARGIN));
+	segment.load();
+	
+	segment_picture.add_part(shadow_box, 6, -6);
+	segment_picture.add_part(background_box, 0, 0);
+	segment_picture.add_part(segment, 0, 0);
+	align_text_to_top_left_box(segment_picture, background_box, segment);
+	
+	stimulus_event event = item.add_stimulus_event(segment_picture);
+	event.set_port_code(int_triggers[index][segment_number]);
+	event.set_duration(int_durations_ms[index][segment_number]);
+	event.set_deltat(time); #Based on the begin of the previous one.
+	
+	string substring = segment.caption();
+	substring.resize(15);
+	event.set_event_code(substring) ;
+end;
+
+sub
+	generate_trials
+begin
+	loop	int itrial = 1 until itrial > NUMBER_OF_TRIALS begin
+		trial item = new trial;
+		MAIN_PLAYLIST[itrial]=item;
+		item.set_type(item.FIXED);
+
+		insert_image_picture(item, itrial);
+		int reference_time = item.get_stimulus_event(1).duration()+500;
+		
+		loop int segment_number = 1 until segment_number > NUMBER_OF_SEGMENTS begin
+			insert_segment_picture(item, itrial, segment_number,reference_time);
+			reference_time = int_durations_ms[itrial][segment_number];
+			segment_number = segment_number + 1;
+		end;
+		
+		itrial = itrial + 1;
+	end;
+end;
+
+#################################################
+# Present trials
+#################################################
+
+read_in_input_file("stimuli\\" + INPUT_FILENAME);
+generate_trials();
+# Mark start.
+wait_interval(300); port.send_code(parameter_manager.get_int("Start Marker")); wait_interval(300);
+
+instruction.present();
+
+loop int itrial = 1 until itrial > MAIN_PLAYLIST.count() begin
+	pause.present();
+	wait_interval(100); # Prevent port conflicts
+	MAIN_PLAYLIST[itrial].present();
+	itrial = itrial + 1;
+end;
+
+# Mark end.
+wait_interval(300); port.send_code(parameter_manager.get_int("Stop Marker"))
