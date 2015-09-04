@@ -1,4 +1,6 @@
-# PRESENTATION-Frequency-Following-Response
-Presentation script that presents the same stimuli many times.
+# PRESENTATION-BRaTWoRDS
+Presentation script that presents the sentences and pictures and sends triggers at appropriate times.
 
-Programmed in Presentation(r) Neurobehavioral Systems to be used in conjunction with BioSemi MkII. 
+Text presentation is autopaced but trial continuation is self paced.
+
+Programmed in Presentation(r) Neurobehavioral Systems to be used in conjunction with Mind Media Nexus. 
