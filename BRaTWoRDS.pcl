@@ -10,6 +10,12 @@ pause_text.redraw();
 instruction_text.set_caption(parameter_manager.get_string("Instruction Text"));
 instruction_text.redraw();
 
+post_practice_text.set_caption(parameter_manager.get_string("Post Practice Text"));
+post_practice_text.redraw();
+
+major_pause_text.set_caption(parameter_manager.get_string("Major Pause Text"));
+major_pause_text.redraw();
+
 int DURATION_OF_IMAGE =  parameter_manager.get_int("Duration Of Image",1000);
 int TRIAL_START_TRIGGER = parameter_manager.get_int("Start Marker",100);
 int TRIAL_STOP_TRIGGER = parameter_manager.get_int("Stop Marker",110);
@@ -18,8 +24,12 @@ string INPUT_FILENAME = parameter_manager.get_string("Input File");
 string IN_LINE_DELIMITER = "\t"; # Putting in a tab does not work if done via parameters!
 
 int NUMBER_OF_TRIALS = parameter_manager.get_int("Number Of Trials", 64);
+int NUMBER_OF_PRACTICE_TRIALS = parameter_manager.get_int("Number of Practice Trials", 2);
 int NUMBER_OF_SEGMENTS = parameter_manager.get_int("Number Of Segments", 8);
 int NUMBER_OF_COLUMNS = parameter_manager.get_int("Number Of Columns", 26);
+
+array<int> TRIALS_AT_WHICH_TO_PAUSE[0];
+parameter_manager.get_ints("Trials at which to Pause", TRIALS_AT_WHICH_TO_PAUSE);
 
 rgb_color INSTRUCTION_TEXT_COLOR = parameter_manager.get_color("Instruction Text Color");
 rgb_color BACKGROUND_COLOR = parameter_manager.get_color("Background Color");
@@ -27,6 +37,7 @@ default.set_background_color(BACKGROUND_COLOR);
 rgb_color STIMULUS_TEXT_COLOR = parameter_manager.get_color("Stimulus Text Color");
 rgb_color STIMULUS_TEXT_BACKGROUND_COLOR = parameter_manager.get_color("Stimulus Text Background Color");
 
+bool ALIGN_TEXT_TO_LEFT_SIDE = parameter_manager.get_bool("Align text to left side text box");
 
 double TEXT_AREA_WIDTH = double(parameter_manager.get_int("Text Area Width"))/100;
 double TEXT_AREA_HEIGHT = double(parameter_manager.get_int("Text Area Height"))/100;
@@ -35,6 +46,22 @@ int FONT_SIZE = parameter_manager.get_int("Font Size");
 
 #################################################
 array<trial> MAIN_PLAYLIST[NUMBER_OF_TRIALS];
+
+sub 
+	bool trial_requires_major_pause( int itrial )
+begin
+	loop
+		int index = 1
+	until
+		index > TRIALS_AT_WHICH_TO_PAUSE.count()
+	begin
+		if(itrial == TRIALS_AT_WHICH_TO_PAUSE[index]) then
+			return true;
+		end;
+		index = index + 1;
+	end;
+	return false;
+end;
 
 array<string> COLUMN_NAMES[0];
 array<int> INT_ID[NUMBER_OF_TRIALS];
@@ -135,9 +162,10 @@ begin
 	image.load();
 	image_picture.add_part(image, 0, 0);
 	stimulus_event event = item.add_stimulus_event(image_picture);
+	event.set_time(300);
 	event.set_port_code(TRIAL_START_TRIGGER);
 	event.set_duration(DURATION_OF_IMAGE);
-	event.set_event_code("Image Shown");
+	event.set_event_code(string(TRIAL_START_TRIGGER));
 end;
 
 sub
@@ -145,11 +173,11 @@ sub
 begin
 	double difference_x =  (-background_box.width_pix()/2) - ( -segment.width()/2 );
 	difference_x = difference_x + TEXT_AREA_MARGIN;
-	pic.set_part_x(3, difference_x); # Assumes that center_x is on 0.
+	pic.set_part_x(2, difference_x); # Assumes that center_x is on 0.
 	
 	double difference_y =  (background_box.height_pix()/2) - ( segment.height()/2 );
 	difference_y = difference_y - TEXT_AREA_MARGIN;
-	pic.set_part_y(3, difference_y);# Assumes that center_y is on 0.
+	pic.set_part_y(2, difference_y);# Assumes that center_y is on 0.
 end;
 
 sub
@@ -160,9 +188,6 @@ begin
 	int text_width = int(TEXT_AREA_WIDTH * display_device.width());
 	int text_height = int(TEXT_AREA_HEIGHT * display_device.height());
 	box background_box = new box(text_height, text_width, STIMULUS_TEXT_BACKGROUND_COLOR);
-	rgb_color shadow;
-	shadow.set(100,100,100);
-	box shadow_box = new box(text_height, text_width, shadow);
 	segment_picture.set_background_color(BACKGROUND_COLOR);
 	
 	text segment = new text();
@@ -176,19 +201,19 @@ begin
 	segment.set_max_text_height(text_height - (2* TEXT_AREA_MARGIN));
 	segment.load();
 	
-	segment_picture.add_part(shadow_box, 6, -6);
 	segment_picture.add_part(background_box, 0, 0);
 	segment_picture.add_part(segment, 0, 0);
-	align_text_to_top_left_box(segment_picture, background_box, segment);
+	
+	if(ALIGN_TEXT_TO_LEFT_SIDE) then
+		align_text_to_top_left_box(segment_picture, background_box, segment);
+	end;
 	
 	stimulus_event event = item.add_stimulus_event(segment_picture);
 	event.set_port_code(int_triggers[index][segment_number]);
 	event.set_duration(int_durations_ms[index][segment_number]);
 	event.set_deltat(time); #Based on the begin of the previous one.
 	
-	string substring = segment.caption();
-	substring.resize(15);
-	event.set_event_code(substring) ;
+	event.set_event_code(string(int_triggers[index][segment_number]));
 end;
 
 sub
@@ -198,7 +223,6 @@ begin
 		trial item = new trial;
 		MAIN_PLAYLIST[itrial]=item;
 		item.set_type(item.FIXED);
-
 		insert_image_picture(item, itrial);
 		int reference_time = item.get_stimulus_event(1).duration()+500;
 		
@@ -218,17 +242,28 @@ end;
 
 read_in_input_file("stimuli\\" + INPUT_FILENAME);
 generate_trials();
+
 # Mark start.
-wait_interval(300); port.send_code(parameter_manager.get_int("Start Marker")); wait_interval(300);
+wait_interval(300); port.send_code(200); wait_interval(300);
 
 instruction.present();
 
 loop int itrial = 1 until itrial > MAIN_PLAYLIST.count() begin
-	pause.present();
+	
 	wait_interval(100); # Prevent port conflicts
+	
 	MAIN_PLAYLIST[itrial].present();
+	
+	if(itrial == NUMBER_OF_PRACTICE_TRIALS) then
+		post_practice_instruction.present();
+	elseif(trial_requires_major_pause(itrial)) then
+		major_pause.present();
+	else
+		pause.present();
+	end;
+	
 	itrial = itrial + 1;
 end;
 
 # Mark end.
-wait_interval(300); port.send_code(parameter_manager.get_int("Stop Marker"))
+wait_interval(300); port.send_code(201)

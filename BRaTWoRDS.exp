@@ -61,13 +61,13 @@
 <sd>
 <val>
 <dat>
-<val>100</val>
+<val>101</val>
 </dat>
 <id>0</id>
 </val>
 <val>
 <dat>
-<val>110</val>
+<val>107</val>
 </dat>
 <id>1</id>
 </val>
@@ -91,19 +91,19 @@
 </val>
 <val>
 <dat>
-<val>( 192, 192, 192 )</val>
+<val>( 0, 0, 0 )</val>
 </dat>
 <id>5</id>
 </val>
 <val>
 <dat>
-<val>( 0, 0, 0 )</val>
+<val>( 255, 255, 255 )</val>
 </dat>
 <id>6</id>
 </val>
 <val>
 <dat>
-<val>( 255, 255, 255 )</val>
+<val>( 0, 0, 0 )</val>
 </dat>
 <id>7</id>
 </val>
@@ -139,7 +139,7 @@
 </val>
 <val>
 <dat>
-<val>20</val>
+<val>25</val>
 </dat>
 <id>13</id>
 </val>
@@ -151,9 +151,45 @@
 </val>
 <val>
 <dat>
-<val>20</val>
+<val>22</val>
 </dat>
 <id>15</id>
+</val>
+<val>
+<dat>
+<val>2000</val>
+</dat>
+<id>16</id>
+</val>
+<val>
+<dat>
+<val>0</val>
+</dat>
+<id>17</id>
+</val>
+<val>
+<dat>
+<val>21, 42</val>
+</dat>
+<id>18</id>
+</val>
+<val>
+<dat>
+<val>2</val>
+</dat>
+<id>19</id>
+</val>
+<val>
+<dat>
+<val>Post Practice Text</val>
+</dat>
+<id>20</id>
+</val>
+<val>
+<dat>
+<val>MAJOR PAUSE TEXT</val>
+</dat>
+<id>21</id>
 </val>
 </sd>
 <sid>-1</sid>
@@ -170,12 +206,15 @@
 <pid>11</pid>
 <pid>9</pid>
 <pid>10</pid>
+<pid>19</pid>
 </pl>
 </grp>
 <grp>
 <gn>Text Settings</gn>
 <pl>
 <pid>3</pid>
+<pid>20</pid>
+<pid>21</pid>
 <pid>4</pid>
 <pid>12</pid>
 <pid>13</pid>
@@ -193,10 +232,18 @@
 </pl>
 </grp>
 <grp>
-<gn>Start and End Markers</gn>
+<gn>Markers Settings</gn>
 <pl>
 <pid>0</pid>
 <pid>1</pid>
+</pl>
+</grp>
+<grp>
+<gn>Miscellaneous Settings</gn>
+<pl>
+<pid>18</pid>
+<pid>16</pid>
+<pid>17</pid>
 </pl>
 </grp>
 </grps>
@@ -206,7 +253,7 @@
 <parm>
 <id>0</id>
 <set>
-<desc>The marker that is send when the Trial is about to start.</desc>
+<desc>The marker that is send when the Trial is about to start. This is the image trial.</desc>
 <edit>1</edit>
 <name>Start Marker</name>
 <set>
@@ -220,7 +267,7 @@
 <parm>
 <id>1</id>
 <set>
-<desc>The marker that is send when the Trial is about to stop.</desc>
+<desc>The marker that is send when the Trial is about to stop. This is when the pause page is shown.</desc>
 <edit>1</edit>
 <name>Stop Marker</name>
 <set>
@@ -264,7 +311,7 @@
 <set>
 <desc>Text shown at the pause between trials.</desc>
 <edit>1</edit>
-<name>PauseText</name>
+<name>Pause Text</name>
 <set>
 <rest></rest>
 </set>
@@ -332,7 +379,7 @@
 <parm>
 <id>9</id>
 <set>
-<desc></desc>
+<desc>Total (including practice)</desc>
 <edit>1</edit>
 <name>Number Of Trials</name>
 <set>
@@ -424,6 +471,91 @@
 </set>
 <temp>0</temp>
 <type>int</type>
+<vis>1</vis>
+</set>
+</parm>
+<parm>
+<id>16</id>
+<set>
+<desc>In ms.</desc>
+<edit>1</edit>
+<name>Duration Of Image</name>
+<set>
+<rest></rest>
+</set>
+<temp>0</temp>
+<type>int</type>
+<vis>1</vis>
+</set>
+</parm>
+<parm>
+<id>17</id>
+<set>
+<desc>If set to false the text will be centered.</desc>
+<edit>1</edit>
+<name>Align text to left side text box</name>
+<set>
+<rest></rest>
+</set>
+<temp>0</temp>
+<type>bool</type>
+<vis>1</vis>
+</set>
+</parm>
+<parm>
+<id>18</id>
+<set>
+<desc>Trials at wich a major pause will be introduced.</desc>
+<edit>1</edit>
+<name>Trials at which to Pause</name>
+<set>
+<dim>1</dim>
+<rest></rest>
+</set>
+<temp>0</temp>
+<type>int_array</type>
+<vis>1</vis>
+</set>
+</parm>
+<parm>
+<id>19</id>
+<set>
+<desc></desc>
+<edit>1</edit>
+<name>Number of Practice Trials</name>
+<set>
+<rest></rest>
+</set>
+<temp>0</temp>
+<type>int</type>
+<vis>1</vis>
+</set>
+</parm>
+<parm>
+<id>20</id>
+<set>
+<desc>Text shown after the last practice trial.</desc>
+<edit>1</edit>
+<name>Post Practice Text</name>
+<set>
+<rest></rest>
+</set>
+<temp>0</temp>
+<type>string</type>
+<vis>1</vis>
+</set>
+</parm>
+<parm>
+<id>21</id>
+<set>
+<desc>Text shown after the end of specified trials (normal pause is shown =) )</desc>
+<edit>1</edit>
+<name>Major Pause Text</name>
+<set>
+<rest></rest>
+</set>
+<temp>0</temp>
+<type>string</type>
 <vis>1</vis>
 </set>
 </parm>
@@ -707,9 +839,9 @@
 <idv>
 <device_type>3</device_type>
 <dx_device_type>19</dx_device_type>
-<ibn>ENTER</ibn>
+<ibn>SPACE</ibn>
 <idn>Keyboard</idn>
-<offset>28</offset>
+<offset>57</offset>
 </idv>
 <sfn>D:\Users\Chris\SurfDrive\Development_back_up\presentation\bjorn-t-hart\PRESENTATIO-Bjorn-t-hart-BRaTWoRDS-master\BRaTWoRDS.sce</sfn>
 </sce>
