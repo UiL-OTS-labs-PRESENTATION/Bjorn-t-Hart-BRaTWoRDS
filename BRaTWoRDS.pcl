@@ -20,13 +20,15 @@ int DURATION_OF_IMAGE =  parameter_manager.get_int("Duration Of Image",1000);
 int TRIAL_START_TRIGGER = parameter_manager.get_int("Start Marker",100);
 int TRIAL_STOP_TRIGGER = parameter_manager.get_int("Stop Marker",110);
 
+int SHORT_PAUSE_BETWEEN_SEGMENTS = parameter_manager.get_int("Short Pause Between Segments",500);
+
 string INPUT_FILENAME = parameter_manager.get_string("Input File");
 string IN_LINE_DELIMITER = "\t"; # Putting in a tab does not work if done via parameters!
 
-int NUMBER_OF_TRIALS = parameter_manager.get_int("Number Of Trials", 64);
+int NUMBER_OF_TRIALS = parameter_manager.get_int("Number Of Trials", 66);
 int NUMBER_OF_PRACTICE_TRIALS = parameter_manager.get_int("Number of Practice Trials", 2);
-int NUMBER_OF_SEGMENTS = parameter_manager.get_int("Number Of Segments", 8);
-int NUMBER_OF_COLUMNS = parameter_manager.get_int("Number Of Columns", 26);
+int NUMBER_OF_SEGMENTS = parameter_manager.get_int("Number Of Segments", 9);
+int NUMBER_OF_COLUMNS = parameter_manager.get_int("Number Of Columns", 29);
 
 array<int> TRIALS_AT_WHICH_TO_PAUSE[0];
 parameter_manager.get_ints("Trials at which to Pause", TRIALS_AT_WHICH_TO_PAUSE);
@@ -201,6 +203,7 @@ begin
 	segment.set_max_text_height(text_height - (2* TEXT_AREA_MARGIN));
 	segment.load();
 	
+	default.add_part(background_box, 0, 0);
 	segment_picture.add_part(background_box, 0, 0);
 	segment_picture.add_part(segment, 0, 0);
 	
@@ -209,6 +212,7 @@ begin
 	end;
 	
 	stimulus_event event = item.add_stimulus_event(segment_picture);
+
 	event.set_port_code(int_triggers[index][segment_number]);
 	event.set_duration(int_durations_ms[index][segment_number]);
 	event.set_deltat(time); #Based on the begin of the previous one.
@@ -224,11 +228,11 @@ begin
 		MAIN_PLAYLIST[itrial]=item;
 		item.set_type(item.FIXED);
 		insert_image_picture(item, itrial);
-		int reference_time = item.get_stimulus_event(1).duration()+500;
+		int reference_time = item.get_stimulus_event(1).duration()+SHORT_PAUSE_BETWEEN_SEGMENTS;
 		
 		loop int segment_number = 1 until segment_number > NUMBER_OF_SEGMENTS begin
 			insert_segment_picture(item, itrial, segment_number,reference_time);
-			reference_time = int_durations_ms[itrial][segment_number];
+			reference_time = int_durations_ms[itrial][segment_number]+SHORT_PAUSE_BETWEEN_SEGMENTS;
 			segment_number = segment_number + 1;
 		end;
 		

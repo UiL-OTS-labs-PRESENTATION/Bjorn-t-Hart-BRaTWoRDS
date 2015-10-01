@@ -1,5 +1,5 @@
 <ver>17.2</ver>
-<efn>D:\Users\Chris\SurfDrive\Development_back_up\presentation\bjorn-t-hart\PRESENTATIO-Bjorn-t-hart-BRaTWoRDS-master\BRaTWoRDS.exp</efn>
+<efn>G:\Bjorn\ACE-BRaT 2\Script\PREENTATION-bjorn-t-hart-BRaTWoRDS-master\BRaTWoRDS.exp</efn>
 <author>Chris van Run</author>
 <con>
 <pause>P</pause>
@@ -18,14 +18,14 @@
 <ddi>0</ddi>
 <dds>
 <display>
-<color>16</color>
-<height>1050</height>
+<color>0</color>
+<height>0</height>
 <icm_profile></icm_profile>
-<index>1</index>
-<name>Intel(R) HD Graphics</name>
-<refresh>75</refresh>
+<index>-2</index>
+<name></name>
+<refresh>0</refresh>
 <use_icm>0</use_icm>
-<width>1680</width>
+<width>0</width>
 </display>
 <icm_profile></icm_profile>
 <use_icm>0</use_icm>
@@ -44,11 +44,11 @@
 <lfn></lfn>
 </docs>
 <dp_list></dp_list>
-<dsd>D:\Users\Chris\SurfDrive\Development_back_up\presentation\bjorn-t-hart\PRESENTATIO-Bjorn-t-hart-BRaTWoRDS-master\stimuli</dsd>
+<dsd>G:\Bjorn\ACE-BRaT 2\Script\PREENTATION-bjorn-t-hart-BRaTWoRDS-master\stimuli</dsd>
 <dxv>8</dxv>
 <efs>
-<filename>D:\Users\Chris\SurfDrive\Development_back_up\presentation\bjorn-t-hart\PRESENTATIO-Bjorn-t-hart-BRaTWoRDS-master\BRaTWoRDS.sce</filename>
-<filename>D:\Users\Chris\SurfDrive\Development_back_up\presentation\bjorn-t-hart\PRESENTATIO-Bjorn-t-hart-BRaTWoRDS-master\BRaTWoRDS.pcl</filename>
+<filename>G:\Bjorn\ACE-BRaT 2\Script\PREENTATION-bjorn-t-hart-BRaTWoRDS-master\BRaTWoRDS.sce</filename>
+<filename>G:\Bjorn\ACE-BRaT 2\Script\PREENTATION-bjorn-t-hart-BRaTWoRDS-master\BRaTWoRDS.pcl</filename>
 </efs>
 <exclusive_mouse>1</exclusive_mouse>
 <exp_version>1.0</exp_version>
@@ -73,19 +73,38 @@
 </val>
 <val>
 <dat>
-<val>brat1.csv</val>
+<val>ACE-BRaT 2 Lijst 4.txt</val>
 </dat>
 <id>2</id>
 </val>
 <val>
 <dat>
-<val>Text shown at the start of the experiment.</val>
+<val>Welkom bij dit experiment. Je krijgt zometeen 64 korte 
+verhaaltjes te lezen. Deze zijn opgedeeld in 3 blokken. 
+Het is de bedoeling dat je goed oplet en deze aandachtig leest. 
+Vanwege de gevoeligheid van de apparatuur is het belangrijk dat 
+je zo ontspannen en stil mogelijk blijft zitten tijdens het lezen. 
+Probeer niet te bewegen of te veel te knipperen. Er zijn 2 pauzes 
+ingelast om te verzitten en even te onspannen.
+
+Elk verhaaltje wordt steeds in 8 segmenten aangeboden. Elk segment gaat
+steeds vanzelf door naar het volgende, zonder dat je iets hoeft te doen. 
+Aan het begin van elk verhaaltje krijg je steeds kort hetzelfde plaatje 
+te zien, kijk hier rustig naar.
+
+Na elk verhaaltje, druk je als je klaar bent op de 'spatiebalk' om naar 
+het volgende verhaal door te gaan.
+
+Je krijgt zometeen eerst twee proefverhalen te lezen, zodat je alvast kan wennen
+aan de structuur.
+
+Druk op 'spatiebalk' om naar het eerste proefverhaal te gaan.</val>
 </dat>
 <id>3</id>
 </val>
 <val>
 <dat>
-<val>Text shown at the pause between trials.</val>
+<val>Druk op 'spatiebalk' om naar het volgende verhaal te gaan.</val>
 </dat>
 <id>4</id>
 </val>
@@ -103,7 +122,7 @@
 </val>
 <val>
 <dat>
-<val>( 0, 0, 0 )</val>
+<val>( 79, 79, 79 )</val>
 </dat>
 <id>7</id>
 </val>
@@ -115,19 +134,19 @@
 </val>
 <val>
 <dat>
-<val>64</val>
+<val>66</val>
 </dat>
 <id>9</id>
 </val>
 <val>
 <dat>
-<val>8</val>
+<val>9</val>
 </dat>
 <id>10</id>
 </val>
 <val>
 <dat>
-<val>26</val>
+<val>29</val>
 </dat>
 <id>11</id>
 </val>
@@ -139,13 +158,13 @@
 </val>
 <val>
 <dat>
-<val>25</val>
+<val>50</val>
 </dat>
 <id>13</id>
 </val>
 <val>
 <dat>
-<val>20</val>
+<val>26</val>
 </dat>
 <id>14</id>
 </val>
@@ -181,15 +200,23 @@
 </val>
 <val>
 <dat>
-<val>Post Practice Text</val>
+<val>Dit waren de oefenverhalen, de rest van de verhalen verloopt net zo.
+De proefleider komt nu nog even binnen om te vragen of alles duidelijk is</val>
 </dat>
 <id>20</id>
 </val>
 <val>
 <dat>
-<val>MAJOR PAUSE TEXT</val>
+<val>Er volgt nu een korte pauze, de proefleider komt even binnen om te vragen of alles goed is. 
+Zodra je weer klaar bent om verder te gaan, druk je op 'spatiebalk'.</val>
 </dat>
 <id>21</id>
+</val>
+<val>
+<dat>
+<val>500</val>
+</dat>
+<id>22</id>
 </val>
 </sd>
 <sid>-1</sid>
@@ -244,6 +271,7 @@
 <pid>18</pid>
 <pid>16</pid>
 <pid>17</pid>
+<pid>22</pid>
 </pl>
 </grp>
 </grps>
@@ -559,6 +587,20 @@
 <vis>1</vis>
 </set>
 </parm>
+<parm>
+<id>22</id>
+<set>
+<desc>in ms</desc>
+<edit>1</edit>
+<name>Short Pause Between Segments</name>
+<set>
+<rest></rest>
+</set>
+<temp>0</temp>
+<type>int</type>
+<vis>1</vis>
+</set>
+</parm>
 </parms>
 <ssl></ssl>
 </parms>
@@ -602,7 +644,7 @@
 <idt>0</idt>
 <ip_chans></ip_chans>
 <isb>10000</isb>
-<lfd>logs</lfd>
+<lfd>G:\Bjorn\ACE-BRaT 2\Script\PREENTATION-bjorn-t-hart-BRaTWoRDS-master\logs</lfd>
 <lnb>0</lnb>
 <lno>0</lno>
 <log>
@@ -843,7 +885,7 @@
 <idn>Keyboard</idn>
 <offset>57</offset>
 </idv>
-<sfn>D:\Users\Chris\SurfDrive\Development_back_up\presentation\bjorn-t-hart\PRESENTATIO-Bjorn-t-hart-BRaTWoRDS-master\BRaTWoRDS.sce</sfn>
+<sfn>G:\Bjorn\ACE-BRaT 2\Script\PREENTATION-bjorn-t-hart-BRaTWoRDS-master\BRaTWoRDS.sce</sfn>
 </sce>
 <sct>
 <capture_device>
@@ -883,7 +925,7 @@
 </sde>
 <sdv>Primary Sound Driver</sdv>
 <show_dis>1</show_dis>
-<show_parm>0</show_parm>
+<show_parm>1</show_parm>
 <show_term>1</show_term>
 <smc>2</smc>
 <smd>24</smd>

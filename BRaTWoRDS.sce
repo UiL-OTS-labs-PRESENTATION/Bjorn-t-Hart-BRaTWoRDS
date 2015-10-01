@@ -5,7 +5,7 @@ scenario = "BRaTWorDS"; 						# for log-file
 write_codes = true; 								# send codes to the acquisition devices
 pulse_width = 10;									# determines the length of time that tøhe codes remain on the port
 active_buttons = 1;								# 1 button active
-button_codes = 33;								# Code that is send if the button (def: enter)is pressed.
+button_codes = 255;								# Code that is send if the button (def: enter)is pressed.
 
 begin;
 
