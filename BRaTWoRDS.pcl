@@ -16,19 +16,19 @@ post_practice_text.redraw();
 major_pause_text.set_caption(parameter_manager.get_string("Major Pause Text"));
 major_pause_text.redraw();
 
-int DURATION_OF_IMAGE =  parameter_manager.get_int("Duration Of Image",1000);
-int TRIAL_START_TRIGGER = parameter_manager.get_int("Start Marker",100);
-int TRIAL_STOP_TRIGGER = parameter_manager.get_int("Stop Marker",110);
+int DURATION_OF_IMAGE =  parameter_manager.get_int("Duration Of Image");
+int TRIAL_START_TRIGGER = parameter_manager.get_int("Start Marker");
+int TRIAL_STOP_TRIGGER = parameter_manager.get_int("Stop Marker");
 
-int SHORT_PAUSE_BETWEEN_SEGMENTS = parameter_manager.get_int("Short Pause Between Segments",500);
+int SHORT_PAUSE_BETWEEN_SEGMENTS = parameter_manager.get_int("Short Pause Between Segments");
 
 string INPUT_FILENAME = parameter_manager.get_string("Input File");
 string IN_LINE_DELIMITER = "\t"; # Putting in a tab does not work if done via parameters!
 
-int NUMBER_OF_TRIALS = parameter_manager.get_int("Number Of Trials", 66);
-int NUMBER_OF_PRACTICE_TRIALS = parameter_manager.get_int("Number of Practice Trials", 2);
-int NUMBER_OF_SEGMENTS = parameter_manager.get_int("Number Of Segments", 9);
-int NUMBER_OF_COLUMNS = parameter_manager.get_int("Number Of Columns", 29);
+int NUMBER_OF_TRIALS = parameter_manager.get_int("Number of Trials");
+int NUMBER_OF_PRACTICE_TRIALS = parameter_manager.get_int("Number of Practice Trials");
+int NUMBER_OF_SEGMENTS = parameter_manager.get_int("Number of Segments");
+int NUMBER_OF_COLUMNS = parameter_manager.get_int("Number of Columns");
 
 array<int> TRIALS_AT_WHICH_TO_PAUSE[0];
 parameter_manager.get_ints("Trials at which to Pause", TRIALS_AT_WHICH_TO_PAUSE);
@@ -93,6 +93,8 @@ begin
 	loop until
 		segment_count > NUMBER_OF_SEGMENTS
 	begin
+		term.print_line(segment_count);
+		term.print_line(line_index_offset);
 		str_segments[index][segment_count] = split_string[line_index_offset];
 		line_index_offset = line_index_offset + 1;
 		segment_count = segment_count + 1;
@@ -103,6 +105,8 @@ begin
 	loop until
 		segment_count > NUMBER_OF_SEGMENTS
 	begin
+		term.print_line(segment_count);
+		term.print_line(line_index_offset);
 		int_durations_ms[index][segment_count] = int(split_string[line_index_offset]);
 		line_index_offset = line_index_offset + 1;
 		segment_count = segment_count + 1;
@@ -113,6 +117,8 @@ begin
 	loop until
 		segment_count > NUMBER_OF_SEGMENTS
 	begin
+		term.print_line(segment_count);
+		term.print_line(line_index_offset);
 		int_triggers[index][segment_count] = int(split_string[line_index_offset]);
 		line_index_offset = line_index_offset + 1;
 		segment_count = segment_count + 1;

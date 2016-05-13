@@ -1,0 +1,12 @@
+Scenario - BRaTWorDS
+Logfile written - 05/13/2016 14:38:19
+
+Subject	Trial	Event Type	Code	Time	TTime	Uncertainty	Duration	Uncertainty	ReqTime	ReqDur	Stim Type	Pair Index
+
+blabla	1	Response	255	66339	29113	2
+blabla	2	Picture	101	70427	3000	2	20123	3	3000	20000	other	0
+blabla	2	Picture	65	95748	28321	2	139469	3	28000	180000	other	0
+blabla	2	Response	255	115776	48349	2
+blabla	2	Response	255	175532	108105	2
+blabla	2	Response	255	225050	157623	1
+blabla	2	Quit		232729	165302
