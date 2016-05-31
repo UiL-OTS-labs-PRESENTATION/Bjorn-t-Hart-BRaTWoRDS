@@ -63,6 +63,7 @@ trial
 		} pause_text;
 		x = 0; y = 0;
 	};
+
 	time = 1000;
 	port_code = EXPARAM("Stop Marker");
 	code = EXPARAM("Stop Marker");

@@ -122,7 +122,7 @@ Druk op 'spatiebalk' om naar het eerste proefverhaal te gaan.</val>
 </val>
 <val>
 <dat>
-<val>( 0, 0, 0 )</val>
+<val>( 192, 192, 192 )</val>
 </dat>
 <id>7</id>
 </val>
@@ -824,6 +824,16 @@ Zodra je weer klaar bent om verder te gaan, druk je op 'spatiebalk'.</val>
 <name>Keyboard</name>
 </device>
 <device>
+<device_type>3</device_type>
+<dx_device_type>0</dx_device_type>
+<name>HID Keyboard Device</name>
+</device>
+<device>
+<device_type>3</device_type>
+<dx_device_type>0</dx_device_type>
+<name>HID Keyboard Device 1</name>
+</device>
+<device>
 <abs_axis>
 <dead_zone>0</dead_zone>
 <max>1000</max>
@@ -906,16 +916,6 @@ Zodra je weer klaar bent om verder te gaan, druk je op 'spatiebalk'.</val>
 <max_raw_pos>65535</max_raw_pos>
 <min_raw_pos>0</min_raw_pos>
 <name>HID-compliant mouse 1</name>
-</device>
-<device>
-<device_type>3</device_type>
-<dx_device_type>0</dx_device_type>
-<name>HID Keyboard Device</name>
-</device>
-<device>
-<device_type>3</device_type>
-<dx_device_type>0</dx_device_type>
-<name>HID Keyboard Device 1</name>
 </device>
 <device>
 <abs_axis>

@@ -204,13 +204,21 @@ begin
 	
 	int text_width = int(TEXT_AREA_WIDTH * display_device.width());
 	int text_height = int(TEXT_AREA_HEIGHT * display_device.height());
-	box background_box = new box(text_height, text_width, STIMULUS_TEXT_BACKGROUND_COLOR);
+	
+	rgb_color background_box_color;
+	if( segment_number == 1 ) then
+		background_box_color = BACKGROUND_COLOR;
+	else
+		background_box_color = STIMULUS_TEXT_BACKGROUND_COLOR;
+	end;
+	
+	box background_box = new box(text_height, text_width, background_box_color);
 	segment_picture.set_background_color(BACKGROUND_COLOR);
 	
 	text segment = new text();
 	segment.set_caption(str_segments[index][segment_number]);
 	segment.set_font_color(STIMULUS_TEXT_COLOR);
-	segment.set_background_color(STIMULUS_TEXT_BACKGROUND_COLOR);
+	segment.set_background_color(background_box_color);
 	segment.set_font_size(FONT_SIZE);
 	segment.set_align(segment.ALIGN_LEFT);
 	
@@ -220,8 +228,6 @@ begin
 	
 	default.add_part(background_box, 0, 0);
 	segment_picture.add_part(background_box, 0, 0);
-	segment_picture.add_part(segment, 0, 0);
-	
 	
 	# Add a segment picture if it exists...
 	string segement_picture_filename = str_pictures[index][segment_number];
@@ -232,8 +238,13 @@ begin
 			segment_picture.add_part(image, SEGMENT_PICTURE_X, SEGMENT_PICTURE_Y);
 	end;
 	
+	segment_picture.add_part(segment, 0, 0);
+	
 	if(ALIGN_TEXT_TO_LEFT_SIDE) then
 		align_text_to_top_left_box(segment_picture, background_box, segment);
+	end;
+	if( segment_number == 1 ) then
+		
 	end;
 	
 	stimulus_event event = item.add_stimulus_event(segment_picture);
@@ -246,6 +257,17 @@ begin
 end;
 
 sub
+	insert_blanking_picture(trial& item, int time)
+begin
+	picture blanking_picture = new picture();
+	blanking_picture.set_background_color(BACKGROUND_COLOR);
+	
+	stimulus_event event = item.add_stimulus_event(blanking_picture);
+	event.set_duration(stimulus_event::NEXT_PICTURE);
+	event.set_time(time);
+end;
+
+sub
 	generate_trials
 begin
 	loop	int itrial = 1 until itrial > NUMBER_OF_TRIALS begin
@@ -253,10 +275,13 @@ begin
 		MAIN_PLAYLIST[itrial]=item;
 		item.set_type(item.FIXED);
 		insert_image_picture(item, itrial);
-		int reference_time = item.get_stimulus_event(1).duration()+SHORT_PAUSE_BETWEEN_SEGMENTS;
+		int reference_time = item.get_stimulus_event(1).duration()+300;
+
+		insert_blanking_picture(item, reference_time);
+		reference_time = reference_time + item.get_stimulus_event(2).duration();
 		
 		loop int segment_number = 1 until segment_number > NUMBER_OF_SEGMENTS begin
-			insert_segment_picture(item, itrial, segment_number,reference_time);
+			insert_segment_picture(item, itrial, segment_number, reference_time);
 			reference_time = int_durations_ms[itrial][segment_number]+SHORT_PAUSE_BETWEEN_SEGMENTS;
 			segment_number = segment_number + 1;
 		end;
