@@ -1,5 +1,5 @@
 <ver>17.2</ver>
-<efn>D:\Users\Chris\SurfDrive\Development_back_up\presentation\bjorn-t-hart\PRESENTATION-Bjorn-t-hart-BRaTWoRDS-master - Copy\BRaTWoRDS.exp</efn>
+<efn>D:\Users\Chris\SurfDrive\Development_back_up\presentation\bjorn-t-hart\PRESENTATION-Bjorn-t-hart-BRaTWoRDS-master\BRaTWoRDS.exp</efn>
 <author>Chris van Run</author>
 <con>
 <pause>P</pause>
@@ -15,7 +15,7 @@
 </con>
 <dbi></dbi>
 <dbs>button</dbs>
-<ddi>0</ddi>
+<ddi>1</ddi>
 <dds>
 <display>
 <color>0</color>
@@ -30,7 +30,7 @@
 <icm_profile></icm_profile>
 <use_icm>0</use_icm>
 </dds>
-<ddv>Primary Display Driver</ddv>
+<ddv>Intel(R) HD Graphics</ddv>
 <depchg>1</depchg>
 <discard_windows_messages>0</discard_windows_messages>
 <display_status_window>1</display_status_window>
@@ -44,11 +44,11 @@
 <lfn></lfn>
 </docs>
 <dp_list></dp_list>
-<dsd>D:\Users\Chris\SurfDrive\Development_back_up\presentation\bjorn-t-hart\PRESENTATION-Bjorn-t-hart-BRaTWoRDS-master - Copy\stimuli</dsd>
+<dsd>D:\Users\Chris\SurfDrive\Development_back_up\presentation\bjorn-t-hart\PRESENTATION-Bjorn-t-hart-BRaTWoRDS-master\stimuli</dsd>
 <dxv>8</dxv>
 <efs>
-<filename>D:\Users\Chris\SurfDrive\Development_back_up\presentation\bjorn-t-hart\PRESENTATION-Bjorn-t-hart-BRaTWoRDS-master - Copy\BRaTWoRDS.sce</filename>
-<filename>D:\Users\Chris\SurfDrive\Development_back_up\presentation\bjorn-t-hart\PRESENTATION-Bjorn-t-hart-BRaTWoRDS-master - Copy\BRaTWoRDS.pcl</filename>
+<filename>D:\Users\Chris\SurfDrive\Development_back_up\presentation\bjorn-t-hart\PRESENTATION-Bjorn-t-hart-BRaTWoRDS-master\BRaTWoRDS.sce</filename>
+<filename>D:\Users\Chris\SurfDrive\Development_back_up\presentation\bjorn-t-hart\PRESENTATION-Bjorn-t-hart-BRaTWoRDS-master\BRaTWoRDS.pcl</filename>
 </efs>
 <exclusive_mouse>1</exclusive_mouse>
 <exp_version>1.0</exp_version>
@@ -73,7 +73,7 @@
 </val>
 <val>
 <dat>
-<val>test.txt</val>
+<val>test2.txt</val>
 </dat>
 <id>2</id>
 </val>
@@ -122,7 +122,7 @@ Druk op 'spatiebalk' om naar het eerste proefverhaal te gaan.</val>
 </val>
 <val>
 <dat>
-<val>( 79, 79, 79 )</val>
+<val>( 0, 0, 0 )</val>
 </dat>
 <id>7</id>
 </val>
@@ -146,7 +146,7 @@ Druk op 'spatiebalk' om naar het eerste proefverhaal te gaan.</val>
 </val>
 <val>
 <dat>
-<val>23</val>
+<val>30</val>
 </dat>
 <id>11</id>
 </val>
@@ -218,6 +218,24 @@ Zodra je weer klaar bent om verder te gaan, druk je op 'spatiebalk'.</val>
 </dat>
 <id>22</id>
 </val>
+<val>
+<dat>
+<val>0</val>
+</dat>
+<id>23</id>
+</val>
+<val>
+<dat>
+<val>250</val>
+</dat>
+<id>24</id>
+</val>
+<val>
+<dat>
+<val>400</val>
+</dat>
+<id>25</id>
+</val>
 </sd>
 <sid>-1</sid>
 </ss>
@@ -263,6 +281,14 @@ Zodra je weer klaar bent om verder te gaan, druk je op 'spatiebalk'.</val>
 <pl>
 <pid>0</pid>
 <pid>1</pid>
+</pl>
+</grp>
+<grp>
+<gn>Segment Picture Settings</gn>
+<pl>
+<pid>23</pid>
+<pid>24</pid>
+<pid>25</pid>
 </pl>
 </grp>
 <grp>
@@ -601,6 +627,48 @@ Zodra je weer klaar bent om verder te gaan, druk je op 'spatiebalk'.</val>
 <vis>1</vis>
 </set>
 </parm>
+<parm>
+<id>23</id>
+<set>
+<desc>Determines the x coordinate for the optional segment pictures. Note that 0 means center. Positive x values move the picture to the right and negative values move the picture to the left.</desc>
+<edit>1</edit>
+<name>Segment Picture x</name>
+<set>
+<rest></rest>
+</set>
+<temp>0</temp>
+<type>int</type>
+<vis>1</vis>
+</set>
+</parm>
+<parm>
+<id>24</id>
+<set>
+<desc>Determines the y coordinate for the optional segment pictures. Note that 0 means center. Positive y values move the picture up and negative values move the picture down. It's general setting should be half of the height plus a small margin for the text (50px).</desc>
+<edit>1</edit>
+<name>Segment Picture y</name>
+<set>
+<rest></rest>
+</set>
+<temp>0</temp>
+<type>int</type>
+<vis>1</vis>
+</set>
+</parm>
+<parm>
+<id>25</id>
+<set>
+<desc>Determines the height of the picture as shown on screen. Width is automagically changed to maintain the same scale.</desc>
+<edit>1</edit>
+<name>Segment Picture Height</name>
+<set>
+<rest></rest>
+</set>
+<temp>0</temp>
+<type>int</type>
+<vis>1</vis>
+</set>
+</parm>
 </parms>
 <ssl></ssl>
 </parms>
@@ -644,7 +712,7 @@ Zodra je weer klaar bent om verder te gaan, druk je op 'spatiebalk'.</val>
 <idt>0</idt>
 <ip_chans></ip_chans>
 <isb>10000</isb>
-<lfd>D:\Users\Chris\SurfDrive\Development_back_up\presentation\bjorn-t-hart\PRESENTATION-Bjorn-t-hart-BRaTWoRDS-master - Copy\logs</lfd>
+<lfd>D:\Users\Chris\SurfDrive\Development_back_up\presentation\bjorn-t-hart\PRESENTATION-Bjorn-t-hart-BRaTWoRDS-master\logs</lfd>
 <lnb>0</lnb>
 <lno>0</lno>
 <log>
@@ -756,9 +824,46 @@ Zodra je weer klaar bent om verder te gaan, druk je op 'spatiebalk'.</val>
 <name>Keyboard</name>
 </device>
 <device>
-<device_type>3</device_type>
+<abs_axis>
+<dead_zone>0</dead_zone>
+<max>1000</max>
+<min>-1000</min>
+<name>X-axis</name>
+<saturation>1</saturation>
+</abs_axis>
+<abs_axis>
+<dead_zone>0</dead_zone>
+<max>1000</max>
+<min>-1000</min>
+<name>Y-axis</name>
+<saturation>1</saturation>
+</abs_axis>
+<axis>
+<max>1000</max>
+<min>-1000</min>
+<name>X-axis</name>
+<restricted>1</restricted>
+<scale>1</scale>
+</axis>
+<axis>
+<max>1000</max>
+<min>-1000</min>
+<name>Y-axis</name>
+<restricted>1</restricted>
+<scale>1</scale>
+</axis>
+<axis>
+<max>1000</max>
+<min>-1000</min>
+<name>Wheel</name>
+<restricted>1</restricted>
+<scale>1</scale>
+</axis>
+<device_type>2</device_type>
 <dx_device_type>0</dx_device_type>
-<name>HID Keyboard Device</name>
+<max_raw_pos>65535</max_raw_pos>
+<min_raw_pos>0</min_raw_pos>
+<name>HID-compliant mouse</name>
 </device>
 <device>
 <abs_axis>
@@ -800,7 +905,92 @@ Zodra je weer klaar bent om verder te gaan, druk je op 'spatiebalk'.</val>
 <dx_device_type>0</dx_device_type>
 <max_raw_pos>65535</max_raw_pos>
 <min_raw_pos>0</min_raw_pos>
-<name>HID-compliant mouse</name>
+<name>HID-compliant mouse 1</name>
+</device>
+<device>
+<device_type>3</device_type>
+<dx_device_type>0</dx_device_type>
+<name>HID Keyboard Device</name>
+</device>
+<device>
+<device_type>3</device_type>
+<dx_device_type>0</dx_device_type>
+<name>HID Keyboard Device 1</name>
+</device>
+<device>
+<abs_axis>
+<dead_zone>0</dead_zone>
+<max>1000</max>
+<min>-1000</min>
+<name>X-axis</name>
+<saturation>1</saturation>
+</abs_axis>
+<abs_axis>
+<dead_zone>0</dead_zone>
+<max>1000</max>
+<min>-1000</min>
+<name>Y-axis</name>
+<saturation>1</saturation>
+</abs_axis>
+<axis>
+<max>1000</max>
+<min>-1000</min>
+<name>X-axis</name>
+<restricted>1</restricted>
+<scale>1</scale>
+</axis>
+<axis>
+<max>1000</max>
+<min>-1000</min>
+<name>Y-axis</name>
+<restricted>1</restricted>
+<scale>1</scale>
+</axis>
+<axis>
+<max>1000</max>
+<min>-1000</min>
+<name>Wheel</name>
+<restricted>1</restricted>
+<scale>1</scale>
+</axis>
+<device_type>2</device_type>
+<dx_device_type>0</dx_device_type>
+<max_raw_pos>65535</max_raw_pos>
+<min_raw_pos>0</min_raw_pos>
+<name>HID-compliant mouse 2</name>
+</device>
+<device>
+<axis>
+<dead_zone>0</dead_zone>
+<max>1000</max>
+<min>-1000</min>
+<name>X Axis</name>
+<saturation>1</saturation>
+</axis>
+<axis>
+<dead_zone>0</dead_zone>
+<max>1000</max>
+<min>-1000</min>
+<name>Y Axis</name>
+<saturation>1</saturation>
+</axis>
+<axis>
+<dead_zone>0</dead_zone>
+<max>1000</max>
+<min>-1000</min>
+<name>Z Axis</name>
+<saturation>1</saturation>
+</axis>
+<axis>
+<dead_zone>0</dead_zone>
+<max>1000</max>
+<min>-1000</min>
+<name>Z Rotation</name>
+<saturation>1</saturation>
+</axis>
+<device_type>1</device_type>
+<dx_device_type>20</dx_device_type>
+<name>BeexyBox-B</name>
 </device>
 <device>
 <device_type>9</device_type>
@@ -855,7 +1045,7 @@ Zodra je weer klaar bent om verder te gaan, druk je op 'spatiebalk'.</val>
 <require_name_match>0</require_name_match>
 <reschg>1</reschg>
 <rng>1</rng>
-<rts>1</rts>
+<rts>0</rts>
 <sbs>100000</sbs>
 <sce>
 <sfn>all_scenarios</sfn>
@@ -868,7 +1058,7 @@ Zodra je weer klaar bent om verder te gaan, druk je op 'spatiebalk'.</val>
 <idn>Keyboard</idn>
 <offset>57</offset>
 </idv>
-<sfn>D:\Users\Chris\SurfDrive\Development_back_up\presentation\bjorn-t-hart\PRESENTATION-Bjorn-t-hart-BRaTWoRDS-master - Copy\BRaTWoRDS.sce</sfn>
+<sfn>D:\Users\Chris\SurfDrive\Development_back_up\presentation\bjorn-t-hart\PRESENTATION-Bjorn-t-hart-BRaTWoRDS-master\BRaTWoRDS.sce</sfn>
 </sce>
 <sct>
 <capture_device>
@@ -913,7 +1103,7 @@ Zodra je weer klaar bent om verder te gaan, druk je op 'spatiebalk'.</val>
 <smc>2</smc>
 <smd>24</smd>
 <smr>48000</smr>
-<srs>1</srs>
+<srs>0</srs>
 <ssb>2000</ssb>
 <sse>
 <s>
