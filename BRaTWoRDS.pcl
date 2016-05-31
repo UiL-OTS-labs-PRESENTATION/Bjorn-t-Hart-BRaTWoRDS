@@ -39,6 +39,10 @@ default.set_background_color(BACKGROUND_COLOR);
 rgb_color STIMULUS_TEXT_COLOR = parameter_manager.get_color("Stimulus Text Color");
 rgb_color STIMULUS_TEXT_BACKGROUND_COLOR = parameter_manager.get_color("Stimulus Text Background Color");
 
+int SEGMENT_PICTURE_X = parameter_manager.get_int("Segment Picture x");
+int SEGMENT_PICTURE_Y = parameter_manager.get_int("Segment Picture y");
+double SEGMENT_PICTURE_HEIGHT = parameter_manager.get_int("Segment Picture Height");
+
 bool ALIGN_TEXT_TO_LEFT_SIDE = parameter_manager.get_bool("Align text to left side text box");
 
 double TEXT_AREA_WIDTH = double(parameter_manager.get_int("Text Area Width"))/100;
@@ -68,6 +72,7 @@ end;
 array<string> COLUMN_NAMES[0];
 array<int> INT_ID[NUMBER_OF_TRIALS];
 array<string> str_image[NUMBER_OF_TRIALS];
+array<string> str_pictures[NUMBER_OF_TRIALS][NUMBER_OF_SEGMENTS];
 array<string> str_segments[NUMBER_OF_TRIALS][NUMBER_OF_SEGMENTS];
 array<int> int_triggers[NUMBER_OF_TRIALS][NUMBER_OF_SEGMENTS];
 array<int> int_durations_ms[NUMBER_OF_TRIALS][NUMBER_OF_SEGMENTS];
@@ -87,14 +92,22 @@ begin
 	# Load image
 	str_image[index] = split_string[2];
 	
-	# Load segments
+	# Load pictures
 	int segment_count = 1;
 	int line_index_offset = 3;
 	loop until
 		segment_count > NUMBER_OF_SEGMENTS
 	begin
-		term.print_line(segment_count);
-		term.print_line(line_index_offset);
+		str_pictures[index][segment_count] = split_string[line_index_offset];
+		line_index_offset = line_index_offset + 1;
+		segment_count = segment_count + 1;
+	end;
+	
+	# Load segments
+	segment_count = 1;
+	loop until
+		segment_count > NUMBER_OF_SEGMENTS
+	begin
 		str_segments[index][segment_count] = split_string[line_index_offset];
 		line_index_offset = line_index_offset + 1;
 		segment_count = segment_count + 1;
@@ -105,8 +118,6 @@ begin
 	loop until
 		segment_count > NUMBER_OF_SEGMENTS
 	begin
-		term.print_line(segment_count);
-		term.print_line(line_index_offset);
 		int_durations_ms[index][segment_count] = int(split_string[line_index_offset]);
 		line_index_offset = line_index_offset + 1;
 		segment_count = segment_count + 1;
@@ -117,8 +128,6 @@ begin
 	loop until
 		segment_count > NUMBER_OF_SEGMENTS
 	begin
-		term.print_line(segment_count);
-		term.print_line(line_index_offset);
 		int_triggers[index][segment_count] = int(split_string[line_index_offset]);
 		line_index_offset = line_index_offset + 1;
 		segment_count = segment_count + 1;
@@ -212,6 +221,16 @@ begin
 	default.add_part(background_box, 0, 0);
 	segment_picture.add_part(background_box, 0, 0);
 	segment_picture.add_part(segment, 0, 0);
+	
+	
+	# Add a segment picture if it exists...
+	string segement_picture_filename = str_pictures[index][segment_number];
+	if( segement_picture_filename != "" ) then
+			bitmap image = new bitmap(str_pictures[index][segment_number]);
+			image.set_load_size( SEGMENT_PICTURE_HEIGHT, 0, bitmap::SCALE_TO_HEIGHT);
+			image.load();
+			segment_picture.add_part(image, SEGMENT_PICTURE_X, SEGMENT_PICTURE_Y);
+	end;
 	
 	if(ALIGN_TEXT_TO_LEFT_SIDE) then
 		align_text_to_top_left_box(segment_picture, background_box, segment);
