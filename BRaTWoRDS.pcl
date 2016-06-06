@@ -254,7 +254,6 @@ begin
 		align_text_to_top_left_box(segment_picture, background_box, segment);
 	end;
 	
-	
 	stimulus_event event = item.add_stimulus_event(segment_picture);
 
 	event.set_port_code(int_triggers[index][segment_number]);
@@ -273,6 +272,7 @@ begin
 	stimulus_event event = item.add_stimulus_event(blanking_picture);
 	event.set_duration(stimulus_event::NEXT_PICTURE);
 	event.set_time(time);
+	event.set_event_code("Blanking");
 end;
 
 sub
@@ -283,10 +283,10 @@ begin
 		MAIN_PLAYLIST[itrial]=item;
 		item.set_type(item.FIXED);
 		insert_image_picture(item, itrial);
-		int reference_time = item.get_stimulus_event(1).duration()+300;
-
-		insert_blanking_picture(item, reference_time);
-		reference_time = reference_time + item.get_stimulus_event(2).duration();
+	
+		insert_blanking_picture(item, DURATION_OF_IMAGE+300);
+		
+		int reference_time = 0;
 		
 		loop int segment_number = 1 until segment_number > NUMBER_OF_SEGMENTS begin
 			insert_segment_picture(item, itrial, segment_number, reference_time);
