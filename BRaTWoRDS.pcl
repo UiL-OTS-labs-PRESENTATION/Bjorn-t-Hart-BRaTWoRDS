@@ -21,6 +21,7 @@ int TRIAL_START_TRIGGER = parameter_manager.get_int("Start Marker");
 int TRIAL_STOP_TRIGGER = parameter_manager.get_int("Stop Marker");
 
 int SHORT_PAUSE_BETWEEN_SEGMENTS = parameter_manager.get_int("Short Pause Between Segments");
+int DELAY_SEGMENT_2 = parameter_manager.get_int("Delay Segment 2");
 
 string INPUT_FILENAME = parameter_manager.get_string("Input File");
 string IN_LINE_DELIMITER = "\t"; # Putting in a tab does not work if done via parameters!
@@ -290,7 +291,11 @@ begin
 		
 		loop int segment_number = 1 until segment_number > NUMBER_OF_SEGMENTS begin
 			insert_segment_picture(item, itrial, segment_number, reference_time);
-			reference_time = int_durations_ms[itrial][segment_number]+SHORT_PAUSE_BETWEEN_SEGMENTS;
+			if (segment_number == 1) then
+				reference_time = int_durations_ms[itrial][segment_number]+SHORT_PAUSE_BETWEEN_SEGMENTS+DELAY_SEGMENT_2;
+			else
+				reference_time = int_durations_ms[itrial][segment_number]+SHORT_PAUSE_BETWEEN_SEGMENTS;
+			end;
 			segment_number = segment_number + 1;
 		end;
 		

@@ -15,7 +15,7 @@
 </con>
 <dbi></dbi>
 <dbs>button</dbs>
-<ddi>1</ddi>
+<ddi>0</ddi>
 <dds>
 <display>
 <color>0</color>
@@ -30,7 +30,7 @@
 <icm_profile></icm_profile>
 <use_icm>0</use_icm>
 </dds>
-<ddv>Intel(R) HD Graphics</ddv>
+<ddv>Primary Display Driver</ddv>
 <depchg>1</depchg>
 <discard_windows_messages>0</discard_windows_messages>
 <display_status_window>1</display_status_window>
@@ -67,38 +67,33 @@
 </val>
 <val>
 <dat>
-<val>107</val>
+<val>120</val>
 </dat>
 <id>1</id>
 </val>
 <val>
 <dat>
-<val>test2.txt</val>
+<val>lijst1mbmgb.txt</val>
 </dat>
 <id>2</id>
 </val>
 <val>
 <dat>
-<val>Welkom bij dit experiment. Je krijgt zometeen 64 korte 
-verhaaltjes te lezen. Deze zijn opgedeeld in 3 blokken. 
-Het is de bedoeling dat je goed oplet en deze aandachtig leest. 
-Vanwege de gevoeligheid van de apparatuur is het belangrijk dat 
-je zo ontspannen en stil mogelijk blijft zitten tijdens het lezen. 
-Probeer niet te bewegen of te veel te knipperen. Er zijn 2 pauzes 
-ingelast om te verzitten en even te onspannen.
+<val>Welkom bij dit experiment. 
 
-Elk verhaaltje wordt steeds in 8 segmenten aangeboden. Elk segment gaat
-steeds vanzelf door naar het volgende, zonder dat je iets hoeft te doen. 
-Aan het begin van elk verhaaltje krijg je steeds kort hetzelfde plaatje 
-te zien, kijk hier rustig naar.
+Je leest zometeen steeds over verschillende gebeurtenissen.
+Deze gebeurtenissen overkomen steeds verschillende mensen. 
+Voorafgaand aan elke gebeurtenis krijg je informatie over die mensen. 
+Lees alles steeds aandachtig.
 
-Na elk verhaaltje, druk je als je klaar bent op de 'spatiebalk' om naar 
-het volgende verhaal door te gaan.
+De gebeurtenis wordt automatisch in zes segmenten gepresenteerd.
+Aan het einde van elke gebeurtenis, druk je één keer op spatie om door te gaan.
 
-Je krijgt zometeen eerst twee proefverhalen te lezen, zodat je alvast kan wennen
-aan de structuur.
+Voor elke gebeurtenis zie je steeds hetzelfde plaatje van een bos. 
+Het is de bedoeling dat je hier rustig naar kijkt en stil zit. 
 
-Druk op 'spatiebalk' om naar het eerste proefverhaal te gaan.</val>
+Probeer het hele experiment zo stil mogelijk te zitten. 
+Er zijn twee blokken van ongeveer 20 minuten, met een pauze ertussen.</val>
 </dat>
 <id>3</id>
 </val>
@@ -122,7 +117,7 @@ Druk op 'spatiebalk' om naar het eerste proefverhaal te gaan.</val>
 </val>
 <val>
 <dat>
-<val>( 192, 192, 192 )</val>
+<val>( 128, 128, 128 )</val>
 </dat>
 <id>7</id>
 </val>
@@ -134,7 +129,7 @@ Druk op 'spatiebalk' om naar het eerste proefverhaal te gaan.</val>
 </val>
 <val>
 <dat>
-<val>64</val>
+<val>132</val>
 </dat>
 <id>9</id>
 </val>
@@ -152,13 +147,13 @@ Druk op 'spatiebalk' om naar het eerste proefverhaal te gaan.</val>
 </val>
 <val>
 <dat>
-<val>50</val>
+<val>70</val>
 </dat>
 <id>12</id>
 </val>
 <val>
 <dat>
-<val>50</val>
+<val>70</val>
 </dat>
 <id>13</id>
 </val>
@@ -188,33 +183,33 @@ Druk op 'spatiebalk' om naar het eerste proefverhaal te gaan.</val>
 </val>
 <val>
 <dat>
-<val>21, 42</val>
+<val>2, 68</val>
 </dat>
 <id>18</id>
 </val>
 <val>
 <dat>
-<val>2</val>
+<val>66</val>
 </dat>
 <id>19</id>
+</val>
+<val>
+<dat>
+<val>Dit is het einde van het eerste blok, de experimentleider komt nu even binnen.
+Wacht op instructie.</val>
+</dat>
+<id>20</id>
 </val>
 <val>
 <dat>
 <val>Dit waren de oefenverhalen, de rest van de verhalen verloopt net zo.
 De proefleider komt nu nog even binnen om te vragen of alles duidelijk is</val>
 </dat>
-<id>20</id>
-</val>
-<val>
-<dat>
-<val>Er volgt nu een korte pauze, de proefleider komt even binnen om te vragen of alles goed is. 
-Zodra je weer klaar bent om verder te gaan, druk je op 'spatiebalk'.</val>
-</dat>
 <id>21</id>
 </val>
 <val>
 <dat>
-<val>500</val>
+<val>250</val>
 </dat>
 <id>22</id>
 </val>
@@ -247,6 +242,12 @@ Zodra je weer klaar bent om verder te gaan, druk je op 'spatiebalk'.</val>
 <val>-270</val>
 </dat>
 <id>27</id>
+</val>
+<val>
+<dat>
+<val>10000</val>
+</dat>
+<id>28</id>
 </val>
 </sd>
 <sid>-1</sid>
@@ -312,6 +313,7 @@ Zodra je weer klaar bent om verder te gaan, druk je op 'spatiebalk'.</val>
 <pid>16</pid>
 <pid>17</pid>
 <pid>22</pid>
+<pid>28</pid>
 </pl>
 </grp>
 </grps>
@@ -711,6 +713,20 @@ Zodra je weer klaar bent om verder te gaan, druk je op 'spatiebalk'.</val>
 <vis>1</vis>
 </set>
 </parm>
+<parm>
+<id>28</id>
+<set>
+<desc>Extra delay before segment 2 begins in ms. Increases duration of pause between segment 1 and 2. Note that this is in addition to the Short Pause. </desc>
+<edit>1</edit>
+<name>Delay Segment 2</name>
+<set>
+<rest></rest>
+</set>
+<temp>0</temp>
+<type>int</type>
+<vis>1</vis>
+</set>
+</parm>
 </parms>
 <ssl></ssl>
 </parms>
@@ -788,10 +804,10 @@ Zodra je weer klaar bent om verder te gaan, druk je op 'spatiebalk'.</val>
 <igm>0</igm>
 <il>0</il>
 <ivm>0</ivm>
-<piai>LPT3</piai>
+<piai>LPT2</piai>
 <pian>Parallel Port</pian>
-<pihpn>LPT3</pihpn>
-<pindex>2</pindex>
+<pihpn>LPT2</pihpn>
+<pindex>1</pindex>
 <rs>1</rs>
 <rt>0</rt>
 </p>
@@ -871,6 +887,11 @@ Zodra je weer klaar bent om verder te gaan, druk je op 'spatiebalk'.</val>
 <name>HID Keyboard Device</name>
 </device>
 <device>
+<device_type>3</device_type>
+<dx_device_type>0</dx_device_type>
+<name>HID Keyboard Device 1</name>
+</device>
+<device>
 <abs_axis>
 <dead_zone>0</dead_zone>
 <max>1000</max>
@@ -911,6 +932,123 @@ Zodra je weer klaar bent om verder te gaan, druk je op 'spatiebalk'.</val>
 <max_raw_pos>65535</max_raw_pos>
 <min_raw_pos>0</min_raw_pos>
 <name>HID-compliant mouse</name>
+</device>
+<device>
+<abs_axis>
+<dead_zone>0</dead_zone>
+<max>1000</max>
+<min>-1000</min>
+<name>X-axis</name>
+<saturation>1</saturation>
+</abs_axis>
+<abs_axis>
+<dead_zone>0</dead_zone>
+<max>1000</max>
+<min>-1000</min>
+<name>Y-axis</name>
+<saturation>1</saturation>
+</abs_axis>
+<axis>
+<max>1000</max>
+<min>-1000</min>
+<name>X-axis</name>
+<restricted>1</restricted>
+<scale>1</scale>
+</axis>
+<axis>
+<max>1000</max>
+<min>-1000</min>
+<name>Y-axis</name>
+<restricted>1</restricted>
+<scale>1</scale>
+</axis>
+<axis>
+<max>1000</max>
+<min>-1000</min>
+<name>Wheel</name>
+<restricted>1</restricted>
+<scale>1</scale>
+</axis>
+<device_type>2</device_type>
+<dx_device_type>0</dx_device_type>
+<max_raw_pos>65535</max_raw_pos>
+<min_raw_pos>0</min_raw_pos>
+<name>HID-compliant mouse 1</name>
+</device>
+<device>
+<abs_axis>
+<dead_zone>0</dead_zone>
+<max>1000</max>
+<min>-1000</min>
+<name>X-axis</name>
+<saturation>1</saturation>
+</abs_axis>
+<abs_axis>
+<dead_zone>0</dead_zone>
+<max>1000</max>
+<min>-1000</min>
+<name>Y-axis</name>
+<saturation>1</saturation>
+</abs_axis>
+<axis>
+<max>1000</max>
+<min>-1000</min>
+<name>X-axis</name>
+<restricted>1</restricted>
+<scale>1</scale>
+</axis>
+<axis>
+<max>1000</max>
+<min>-1000</min>
+<name>Y-axis</name>
+<restricted>1</restricted>
+<scale>1</scale>
+</axis>
+<axis>
+<max>1000</max>
+<min>-1000</min>
+<name>Wheel</name>
+<restricted>1</restricted>
+<scale>1</scale>
+</axis>
+<device_type>2</device_type>
+<dx_device_type>0</dx_device_type>
+<max_raw_pos>65535</max_raw_pos>
+<min_raw_pos>0</min_raw_pos>
+<name>HID-compliant mouse 2</name>
+</device>
+<device>
+<axis>
+<dead_zone>0</dead_zone>
+<max>1000</max>
+<min>-1000</min>
+<name>X Axis</name>
+<saturation>1</saturation>
+</axis>
+<axis>
+<dead_zone>0</dead_zone>
+<max>1000</max>
+<min>-1000</min>
+<name>Y Axis</name>
+<saturation>1</saturation>
+</axis>
+<axis>
+<dead_zone>0</dead_zone>
+<max>1000</max>
+<min>-1000</min>
+<name>Z Axis</name>
+<saturation>1</saturation>
+</axis>
+<axis>
+<dead_zone>0</dead_zone>
+<max>1000</max>
+<min>-1000</min>
+<name>Z Rotation</name>
+<saturation>1</saturation>
+</axis>
+<device_type>1</device_type>
+<dx_device_type>20</dx_device_type>
+<name>BeexyBox-B</name>
 </device>
 <device>
 <device_type>9</device_type>
